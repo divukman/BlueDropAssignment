@@ -18,10 +18,10 @@ import java.math.BigDecimal;
 @Component
 @Profile("dev")
 public class DataLoader implements CommandLineRunner {
-    public static final String PRODUCT_1_SKU = "Pro/Pr-CrM22";
-    public static final String PRODUCT_2_SKU = "Pro/Pr-CrM23";
-    public static final String PRODUCT_3_SKU = "Pro/Pr-CrM24";
-    public static final String PRODUCT_4_SKU = "Pro/Pr-CrM25";
+    public static final String PRODUCT_1_SKU = "Pro_Pr_CrM22";
+    public static final String PRODUCT_2_SKU = "Pro_Pr_CrM23";
+    public static final String PRODUCT_3_SKU = "Pro_Pr_CrM24";
+    public static final String PRODUCT_4_SKU = "Pro_Pr_CrM25";
 
 
     private final ProductRepository productRepository;
