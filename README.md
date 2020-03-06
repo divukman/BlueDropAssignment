@@ -1,6 +1,5 @@
-[![CircleCI](https://circleci.com/gh/divukman/BlueDropAssignment/tree/master.svg?style=svg)](https://circleci.com/gh/divukman/BlueDropAssignment/tree/master)
-
 # BlueDrop -> Assignment
+[![CircleCI](https://circleci.com/gh/divukman/BlueDropAssignment/tree/master.svg?style=svg)](https://circleci.com/gh/divukman/BlueDropAssignment/tree/master)
 
 #### Abstract
 BlueDrop project assignment. Simple REST service with CRUD APIs for:
