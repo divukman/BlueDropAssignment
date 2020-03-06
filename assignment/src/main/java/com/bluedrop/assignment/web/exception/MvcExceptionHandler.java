@@ -1,4 +1,4 @@
-package com.bluedrop.assignment.web.controllers;
+package com.bluedrop.assignment.web.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
