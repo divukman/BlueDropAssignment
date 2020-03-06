@@ -2,7 +2,7 @@ package com.bluedrop.assignment.services;
 
 import com.bluedrop.assignment.entities.Product;
 import com.bluedrop.assignment.repositories.ProductRepository;
-import com.bluedrop.assignment.web.controllers.NotFoundException;
+import com.bluedrop.assignment.web.exception.NotFoundException;
 import com.bluedrop.assignment.web.mappers.ProductMapper;
 import com.bluedrop.assignment.web.models.ProductDto;
 import com.bluedrop.assignment.web.models.ProductPagedList;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
