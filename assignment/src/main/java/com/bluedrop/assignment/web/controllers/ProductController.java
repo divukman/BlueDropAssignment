@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/product")
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
@@ -23,7 +23,7 @@ public class ProductController {
     private final ProductService productService;
 
 
-    @GetMapping(produces = { "application/json" }, path = "product")
+    @GetMapping(produces = { "application/json" })
     public ResponseEntity<ProductPagedList> listProducts(@RequestParam(value = "pageNumber", required = false ) Integer pageNumber,
                                                          @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                          @RequestParam(value = "name", required = false) String name) {
@@ -39,27 +39,31 @@ public class ProductController {
         return new ResponseEntity<>(productPagedList, HttpStatus.OK);
     }
 
-    @GetMapping("allproducts")
+    /**
+     * Temp method just to support returning non-paginated data.
+     * @return
+     */
+    @GetMapping("/all")
     public ResponseEntity<List<ProductDto>> geAllProducts() {
         return new ResponseEntity<>(productService.listAllProducts(), HttpStatus.OK);
     }
 
-    @GetMapping("product/{productId}")
+    @GetMapping("/{productId}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("productId") final UUID productId) {
         return new ResponseEntity<>(productService.getById(productId), HttpStatus.OK);
     }
 
-    @GetMapping("product/{sku}")
+    @GetMapping("/sku/{sku}")
     public ResponseEntity<ProductDto> getProductBySku(@PathVariable("sku") final String sku) {
         return new ResponseEntity<>(productService.getBySku(sku), HttpStatus.OK);
     }
 
-    @PostMapping("product")
+    @PostMapping()
     public ResponseEntity saveNewProduct(@RequestBody @Validated ProductDto productDto) {
         return new ResponseEntity(productService.saveNewProduct(productDto), HttpStatus.CREATED);
     }
 
-    @PutMapping("product/{productId}")
+    @PutMapping("/{productId}")
     public ResponseEntity updateProduct(@PathVariable UUID productId, @RequestBody @Validated ProductDto productDto) {
         return new ResponseEntity(productService.updateProduct(productId, productDto), HttpStatus.NO_CONTENT);
     }
