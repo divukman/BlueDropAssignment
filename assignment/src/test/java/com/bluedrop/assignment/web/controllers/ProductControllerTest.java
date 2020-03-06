@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
@@ -120,7 +121,14 @@ class ProductControllerTest {
     }
 
     @Test
-    void getProductBySku() {
+    void getProductBySku() throws Exception {
+        final ProductDto productDto = getProductDto();
+        given(productService.getBySku(any())).willReturn(productDto);
+
+        mockMvc.perform(get("/api/v1/product/sku/dummySKU")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.sku").value(productDto.getSku()));
     }
 
     @Test
