@@ -1,6 +1,6 @@
 # BlueDrop -> Assignment
 
-### Abstract
+#### Abstract
 BlueDrop project assignment. Simple REST service with CRUD APIs for:
 -> Products
 -> Orders
@@ -12,7 +12,7 @@ $ mvn clean package
 $ mvn spring-boot:run
 ```
 
-To do idea:
+#### To do ideas:
 -> Separate into two microservices:
 --> Product microservices
 --> Order microservice
