@@ -13,6 +13,9 @@ $ mvn clean package
 $ mvn spring-boot:run
 ```
 
+### Swagger API DOC
+`<link>` : <http://localhost:8080/swagger-ui.html>
+
 ### To do ideas:
 Separate into two microservices:
 - Product microservices
