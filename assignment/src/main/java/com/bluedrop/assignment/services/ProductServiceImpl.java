@@ -122,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public void deleteProductById(UUID productId) {
-        final Product product = productRepository.findById(productId).orElseThrow(NotFoundException::new);
+        final Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException(String.format("Product with UUID: %s not found.", productId.toString())));
         product.setState(State.DELETED);
         productRepository.save(product);
     }
