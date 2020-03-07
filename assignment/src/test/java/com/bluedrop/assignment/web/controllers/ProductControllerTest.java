@@ -1,5 +1,6 @@
 package com.bluedrop.assignment.web.controllers;
 
+import com.bluedrop.assignment.entities.State;
 import com.bluedrop.assignment.services.ProductService;
 import com.bluedrop.assignment.web.models.ProductDto;
 import com.bluedrop.assignment.web.models.ProductPagedList;
@@ -38,6 +39,7 @@ class ProductControllerTest {
 
     @MockBean
     ProductService productService;
+
 
     private ProductDto getProductDto() {
         final ProductDto productDto = ProductDto.builder()
@@ -79,7 +81,7 @@ class ProductControllerTest {
                 lstProductDTOs.size()
         );
 
-        when(productService.listProducts(any(), eq(PageRequest.of(0, 2)))).thenReturn(productPagedList);
+        when(productService.listProducts(any(), eq(PageRequest.of(0, 2)), eq(State.ACTIVE))).thenReturn(productPagedList);
 
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
         requestParams.add("pageNumber", "0");
@@ -99,7 +101,7 @@ class ProductControllerTest {
 
     @Test
     void geAllProducts() throws Exception {
-        when(productService.listAllProducts()).thenReturn(getProductDtoList());
+        when(productService.listAllProducts(State.ACTIVE)).thenReturn(getProductDtoList());
 
         final String result = mockMvc.perform(get("/api/v1/product/all")
                 .accept(MediaType.APPLICATION_JSON))
@@ -155,6 +157,13 @@ class ProductControllerTest {
         mockMvc.perform(put("/api/v1/product/" + UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(strProductDtoJson))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void deleteProduct() throws Exception {
+        mockMvc.perform(delete("/api/v1/product/" + UUID.randomUUID().toString())
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 }

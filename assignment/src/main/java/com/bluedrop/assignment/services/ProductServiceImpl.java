@@ -1,6 +1,7 @@
 package com.bluedrop.assignment.services;
 
 import com.bluedrop.assignment.entities.Product;
+import com.bluedrop.assignment.entities.State;
 import com.bluedrop.assignment.repositories.ProductRepository;
 import com.bluedrop.assignment.web.exception.NotFoundException;
 import com.bluedrop.assignment.web.mappers.ProductMapper;
@@ -29,17 +30,18 @@ public class ProductServiceImpl implements ProductService {
      * @param name - Product name. Can be null or empty, then returns the page request.
      *               We assume there can be many products of the same name (!?!)
      * @param pageRequest - Page request
+     * @param productState - State of the product: Active or Deleted
      * @return productPagedList - A list of product DTO objects
      */
     @Override
-    public ProductPagedList listProducts(String name, PageRequest pageRequest) {
+    public ProductPagedList listProducts(final String name, final PageRequest pageRequest, final State productState) {
         ProductPagedList productPagedList;
         Page<Product> productPage;
 
         if (!StringUtils.isEmpty(name)) {
-            productPage = productRepository.findAllByName(name, pageRequest);
+            productPage = productRepository.findAllByNameAndState(name, productState, pageRequest);
         } else {
-            productPage = productRepository.findAll(pageRequest);
+            productPage = productRepository.findAllByState(productState, pageRequest);
         }
 
         final List<ProductDto> lstProductDtos = productPage.getContent().stream().map(productMapper::productToProductDto).collect(Collectors.toList());
@@ -53,9 +55,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    /**
+     * Find all products with a given state.
+     * @param productState - Active or Deleted
+     * @return - A list of product dto objects
+     */
     @Override
-    public List<ProductDto> listAllProducts() {
-        return productRepository.findAll().stream().map(productMapper::productToProductDto).collect(Collectors.toList());
+    public List<ProductDto> listAllProducts(final State productState) {
+        return productRepository.findAllByState(productState).stream().map(productMapper::productToProductDto).collect(Collectors.toList());
     }
 
     /**
@@ -75,7 +82,10 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDto saveNewProduct(ProductDto productDto) {
-        return productMapper.productToProductDto(productRepository.save(productMapper.productDtoToProduct(productDto)));
+        final Product product = productMapper.productDtoToProduct(productDto);
+        product.setState(State.ACTIVE);
+
+        return productMapper.productToProductDto(productRepository.save(product));
     }
 
     /**
@@ -103,6 +113,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getBySku(String sku) {
         return productMapper.productToProductDto(productRepository.findBySku(sku).orElseThrow(() -> new NotFoundException(String.format("Product with SKU: %s not found.", sku))));
+    }
+
+
+    /**
+     * Performs a soft deletion of a product (Updates product state to DELETED).
+     * @param productId
+     */
+    @Override
+    public void deleteProductById(UUID productId) {
+        final Product product = productRepository.findById(productId).orElseThrow(NotFoundException::new);
+        product.setState(State.DELETED);
+        productRepository.save(product);
     }
 
 }

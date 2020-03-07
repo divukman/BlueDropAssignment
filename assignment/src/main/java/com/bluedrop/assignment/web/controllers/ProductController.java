@@ -1,5 +1,6 @@
 package com.bluedrop.assignment.web.controllers;
 
+import com.bluedrop.assignment.entities.State;
 import com.bluedrop.assignment.services.ProductService;
 import com.bluedrop.assignment.web.models.ProductDto;
 import com.bluedrop.assignment.web.models.ProductPagedList;
@@ -39,7 +40,7 @@ public class ProductController {
             pageSize = DEFAULT_PAGE_SIZE;
         }
 
-        ProductPagedList productPagedList = productService.listProducts(name, PageRequest.of(pageNumber, pageSize));
+        ProductPagedList productPagedList = productService.listProducts(name, PageRequest.of(pageNumber, pageSize), State.ACTIVE);
         return new ResponseEntity<>(productPagedList, HttpStatus.OK);
     }
 
@@ -50,7 +51,7 @@ public class ProductController {
     @ApiOperation(value = "This endpoint is used to get the all product details. Does not use pagination.")
     @GetMapping("/all")
     public ResponseEntity<List<ProductDto>> geAllProducts() {
-        return new ResponseEntity<>(productService.listAllProducts(), HttpStatus.OK);
+        return new ResponseEntity<>(productService.listAllProducts(State.ACTIVE), HttpStatus.OK);
     }
 
     @ApiOperation(value = "This endpoint is used to get the product by the product id")
@@ -75,6 +76,13 @@ public class ProductController {
     @PutMapping("/{productId}")
     public ResponseEntity updateProduct(@PathVariable UUID productId, @RequestBody @Validated ProductDto productDto) {
         return new ResponseEntity(productService.updateProduct(productId, productDto), HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation(value = "This endpoint is used to soft delete a product")
+    @DeleteMapping("/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable UUID productId) {
+        productService.deleteProductById(productId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }
