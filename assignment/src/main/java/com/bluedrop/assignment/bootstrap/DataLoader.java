@@ -1,6 +1,7 @@
 package com.bluedrop.assignment.bootstrap;
 
 import com.bluedrop.assignment.entities.Product;
+import com.bluedrop.assignment.entities.State;
 import com.bluedrop.assignment.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -39,24 +40,28 @@ public class DataLoader implements CommandLineRunner {
                 .name("Product 1")
                 .sku(DataLoader.PRODUCT_1_SKU)
                 .price(new BigDecimal("33.27"))
+                .state(State.ACTIVE)
                 .build();
 
         final Product product2 = Product.builder()
                 .name("Product 2")
                 .sku(DataLoader.PRODUCT_2_SKU)
                 .price(new BigDecimal("38.33"))
+                .state(State.ACTIVE)
                 .build();
 
         final Product product3 = Product.builder()
                 .name("Product 3")
                 .sku(DataLoader.PRODUCT_3_SKU)
                 .price(new BigDecimal("89.99"))
+                .state(State.ACTIVE)
                 .build();
 
         final Product product4 = Product.builder()
                 .name("Product 4")
                 .sku(DataLoader.PRODUCT_4_SKU)
                 .price(new BigDecimal("170.37"))
+                .state(State.ACTIVE)
                 .build();
 
         productRepository.save(product1);
