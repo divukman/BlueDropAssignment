@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDto getById(UUID productId) {
-        return productMapper.productToProductDto(productRepository.findById(productId).orElseThrow(NotFoundException::new));
+        return productMapper.productToProductDto(productRepository.findById(productId).orElseThrow( () -> new NotFoundException(String.format("Product with UUID: %s not found.", productId.toString())) ));
     }
 
     /**
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDto updateProduct(UUID productId, ProductDto productDto) {
-        final Product product = productRepository.findById(productId).orElseThrow(NotFoundException::new);
+        final Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException(String.format("Product with UUID: %s not found.", productId.toString())) );
 
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDto getBySku(String sku) {
-        return productMapper.productToProductDto(productRepository.findBySku(sku).orElseThrow(NotFoundException::new));
+        return productMapper.productToProductDto(productRepository.findBySku(sku).orElseThrow(() -> new NotFoundException(String.format("Product with SKU: %s not found.", sku))));
     }
 
 }
