@@ -12,17 +12,23 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+/**
+ * Base entity.
+ *
+ * @author Dimitar
+ */
 @Setter
 @Getter
 @NoArgsConstructor
 @MappedSuperclass
 public class BaseEntity {
 
-    public BaseEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate) {
+    public BaseEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, State state) {
         this.id = id;
         this.version = version;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
+        this.state = state;
     }
 
     @Id
@@ -49,4 +55,10 @@ public class BaseEntity {
      */
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
+
+    /**
+     * Used for keeping track of the entity state, ie active or deleted.
+     */
+    @Enumerated(EnumType.STRING)
+    private State state;
 }

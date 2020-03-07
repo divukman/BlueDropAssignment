@@ -11,19 +11,17 @@ import java.util.UUID;
  * Product entity.
  *
  * @author Dimitar
- *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Product extends BaseEntity {
 
-    @Builder // hack to work with super class, use @SuperBuilder in Lombok 1.18
-    public Product(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String sku, String name, BigDecimal price) {
-        super(id, version, createdDate, lastModifiedDate);
+    @Builder // hack to work with super class, try with @SuperBuilder
+    public Product(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, State state, String sku, String name, BigDecimal price) {
+        super(id, version, createdDate, lastModifiedDate, state);
 
         this.sku = sku;
         this.name = name;
