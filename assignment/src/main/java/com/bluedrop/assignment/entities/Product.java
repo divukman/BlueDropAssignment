@@ -1,10 +1,6 @@
 package com.bluedrop.assignment.entities;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,32 +19,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
+public class Product extends BaseEntity {
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
-    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
-    private UUID id;
+    @Builder // hack to work with super class, use @SuperBuilder in Lombok 1.18
+    public Product(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String sku, String name, BigDecimal price) {
+        super(id, version, createdDate, lastModifiedDate);
 
-    @Version
-    private Long version;
-
-    /**
-     * Date the entity was last created.
-     * We are forcing the save to be in the UTC timezone.
-     */
-    @CreationTimestamp
-    @Column(updatable = false)
-    private Timestamp createdDate;
-
-    /**
-     * Date the entity was last modified.
-     * We are forcing the save to be in the UTC timezone.
-     */
-    @UpdateTimestamp
-    private Timestamp lastModifiedDate;
+        this.sku = sku;
+        this.name = name;
+        this.price = price;
+    }
 
     /**
      * SKU Number -> stock keeping unit. A unique product number.
@@ -65,5 +45,4 @@ public class Product {
      * Product price.
      */
     private BigDecimal price;
-
 }
