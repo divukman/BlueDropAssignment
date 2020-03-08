@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -43,4 +44,7 @@ public class Product extends BaseEntity {
      * Product price.
      */
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "product")
+    Set<OrderProduct> orderProducts;
 }
