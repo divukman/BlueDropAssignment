@@ -4,15 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Order entity.
- *
- * @author Ante
- */
 @Entity
 @Getter
 @Setter

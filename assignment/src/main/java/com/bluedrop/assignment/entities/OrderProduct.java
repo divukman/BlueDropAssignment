@@ -13,16 +13,19 @@ import javax.persistence.*;
 @Builder
 public class OrderProduct {
 
-    @EmbeddedId
-    OrderProductKey id;
+    //@EmbeddedId
+    //OrderProductKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
 
+    //@MapsId("order_id")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @MapsId("order_id")
     @JoinColumn(name = "order_id")
     Order order;
 
+    //@MapsId("product_id")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @MapsId("product_id")
     @JoinColumn(name = "product_id")
     Product product;
 

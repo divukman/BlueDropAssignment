@@ -29,10 +29,6 @@ public class DataLoader implements CommandLineRunner {
     private final OrderRepository orderRepository;
     private final OrderProductRepository orderProductRepository;
 
-    private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
-    private final CourseRatingRepository courseRatingRepository;
-
     @Override
     public void run(String... args) {
         if (productRepository.count() == 0) {
@@ -70,7 +66,7 @@ public class DataLoader implements CommandLineRunner {
                 .build();
 
         productRepository.save(product1);
-        productRepository.save(product2);
+        //productRepository.save(product2);
         productRepository.save(product3);
         productRepository.save(product4);
 
@@ -79,54 +75,20 @@ public class DataLoader implements CommandLineRunner {
                 .state(State.ACTIVE)
                 .build();
 
-        orderRepository.save(order1);
+        //orderRepository.save(order1);
 
-//        OrderProduct orderProduct1 = OrderProduct.builder()
-//                .order(order1)
-//                .product(product2)
-//                .quantity(5)
-//                .build();
-//
-//        OrderProduct orderProduct2 = OrderProduct.builder()
-//                .order(order1)
-//                .product(product4)
-//                .quantity(10)
-//                .build();
-//
-//        Set<OrderProduct> orderProductSet = new HashSet<>();
-//        orderProductSet.add(orderProduct1);
-//        orderProductSet.add(orderProduct2);
-//
-//        orderProductRepository.save(orderProduct1);
-//        orderProductRepository.save(orderProduct2);
-//
-//        order1.setOrderProducts(orderProductSet);
-//        orderRepository.save(order1);
+        OrderProduct orderProduct1 = OrderProduct.builder()
+                .order(order1)
+                .product(product2)
+                .quantity(5)
+                .build();
 
-        Student s1 = new Student();
-        s1.setName("Jozo");
+        Set<OrderProduct> orderProductSet = new HashSet<>();
+        orderProductSet.add(orderProduct1);
 
-        Student s2 = new Student();
-        s2.setName("Pero");
+        order1.setOrderProducts(orderProductSet);
+        product2.setOrderProducts(orderProductSet);
 
-        studentRepository.save(s1);
-        studentRepository.save(s2);
-
-        Course c1 = new Course();
-        c1.setName("Matematika");
-        Course c2 = new Course();
-        c2.setName("Fizika");
-
-        courseRepository.save(c1);
-        courseRepository.save(c2);
-
-        CourseRating courseRating = new CourseRating();
-        courseRating.setCourse(c1);
-        courseRating.setStudent(s2);
-
-        courseRatingRepository.save(courseRating);
-
-//      PROBAO RAZNE KOMBINACIJE, NE RADI, EXCEPTION:
-//        org.hibernate.id.IdentifierGenerationException: null id generated for:class com.bluedrop.assignment.entities.CourseRating
+        orderProductRepository.saveAll(orderProductSet);
     }
 }
