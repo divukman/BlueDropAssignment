@@ -31,8 +31,8 @@ $ mvn spring-boot:run
 
 ## To do:
 
-`<active issues>` : <https://github.com/divukman/BlueDropAssignment/issues>
-`<project>` : <https://github.com/divukman/BlueDropAssignment/projects/1>
+`<active issues>` : <https://github.com/divukman/BlueDropAssignment/issues>  
+`<project>` : <https://github.com/divukman/BlueDropAssignment/projects/1>  
 
     
 ## Copyright
