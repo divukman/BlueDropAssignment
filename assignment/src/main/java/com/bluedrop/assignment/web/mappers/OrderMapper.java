@@ -11,19 +11,9 @@ import org.mapstruct.factory.Mappers;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(uses = {DateMapper.class})
+@Mapper
 @DecoratedWith(OrderMapperDecorator.class)
 public interface OrderMapper {
-    ProductMapper PRODUCT_MAPPER = Mappers.getMapper(ProductMapper.class);
-
     OrderDto orderToOrderDto(Order order);
-
-//    default Set<ProductDto> map(Set<OrderProduct> orderProducts) {
-//        if (orderProducts == null) {
-//            return null;
-//        }
-//        return orderProducts.stream().map(orderProduct -> PRODUCT_MAPPER.productToProductDto(orderProduct.getProduct())).collect(Collectors.toSet());
-//    }
-
     Order orderDtoToOrder(OrderDto orderDto);
 }

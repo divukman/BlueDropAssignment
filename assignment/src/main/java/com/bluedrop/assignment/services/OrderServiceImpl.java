@@ -1,6 +1,5 @@
 package com.bluedrop.assignment.services;
 
-import com.bluedrop.assignment.entities.OrderProduct;
 import com.bluedrop.assignment.entities.State;
 import com.bluedrop.assignment.repositories.OrderProductRepository;
 import com.bluedrop.assignment.repositories.OrderRepository;
