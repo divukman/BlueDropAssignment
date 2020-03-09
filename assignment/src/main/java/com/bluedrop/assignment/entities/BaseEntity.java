@@ -1,5 +1,6 @@
 package com.bluedrop.assignment.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 /**
@@ -21,9 +22,10 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @MappedSuperclass
+@EqualsAndHashCode
 public class BaseEntity {
 
-    public BaseEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, State state) {
+    public BaseEntity(UUID id, Long version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate, State state) {
         this.id = id;
         this.version = version;
         this.createdDate = createdDate;
@@ -47,14 +49,14 @@ public class BaseEntity {
      */
     @CreationTimestamp
     @Column(updatable = false)
-    private Timestamp createdDate;
+    private OffsetDateTime createdDate;
 
     /**
      * Date the entity was last modified.
      * We are forcing the save to be in the UTC timezone.
      */
     @UpdateTimestamp
-    private Timestamp lastModifiedDate;
+    private OffsetDateTime lastModifiedDate;
 
     /**
      * Used for keeping track of the entity state, ie active or deleted.

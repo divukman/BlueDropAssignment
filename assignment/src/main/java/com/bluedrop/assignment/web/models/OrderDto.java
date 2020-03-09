@@ -2,17 +2,16 @@ package com.bluedrop.assignment.web.models;
 
 import com.bluedrop.assignment.entities.OrderProduct;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import javax.validation.constraints.Positive;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -21,7 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductDto implements Serializable {
+public class OrderDto implements Serializable {
     static final long serialVersionUID = 9033452488635021259L;
 
     @Null
@@ -31,22 +30,17 @@ public class ProductDto implements Serializable {
     private Integer version;
 
     @Null
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createdDate;
 
     @Null
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedDate;
 
     @NotNull
-    private String sku;
+    private String email;
 
-    @NotBlank
-    private String name;
-
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @Positive
-    @NotNull
-    private BigDecimal price;
+    @Valid
+    @JsonProperty("orderDetails")
+    Set<OrderDetailsDto> orderDetailsDtos;
 }

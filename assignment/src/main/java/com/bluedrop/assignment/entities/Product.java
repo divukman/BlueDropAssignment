@@ -1,10 +1,14 @@
 package com.bluedrop.assignment.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -17,10 +21,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Audited
 public class Product extends BaseEntity {
 
     @Builder // hack to work with super class, try with @SuperBuilder
-    public Product(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, State state, String sku, String name, BigDecimal price) {
+    public Product(UUID id, Long version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate, State state, String sku, String name, BigDecimal price) {
         super(id, version, createdDate, lastModifiedDate, state);
 
         this.sku = sku;
@@ -43,4 +48,8 @@ public class Product extends BaseEntity {
      * Product price.
      */
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    Set<OrderProduct> orderProducts;
 }

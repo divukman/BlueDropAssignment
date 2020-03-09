@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2aea0b3a-d2f4-4516-a3c2-2592b5f0dcae",
+		"_postman_id": "e3f93316-b660-4a07-b684-4d57f11fc0d6",
 		"name": "BlueDrop Assignment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -22,6 +22,28 @@
 						"v1",
 						"product",
 						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET -> /api/v1/order/orders ->  GET ORDERS - NO PAGINATION",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/order/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"orders"
 					]
 				}
 			},
@@ -128,6 +150,44 @@
 		},
 		{
 			"name": "GET -> /api/v1/product/{id} CREATE PRODUCT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sku\": \"Pro_Pr_CrM26\",\n\t\"name\": \"Agera\",\n\t\"price\": \"500000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET -> /api/v1/product/{id} CREATE ORDER",
 			"request": {
 				"method": "POST",
 				"header": [
