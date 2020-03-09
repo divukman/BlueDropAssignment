@@ -27,7 +27,12 @@ $ mvn spring-boot:run
 
 
 ## Swagger API DOC
-`<link>` : <http://localhost:8080/swagger-ui.html>
+`<link>` : <http://localhost:8080/swagger-ui.html>  
+
+## POSTMAN Collection
+Import the collection into Postman.  
+`<link>` : <https://github.com/divukman/BlueDropAssignment/tree/master/postman>  
+
 
 ## To do:
 
