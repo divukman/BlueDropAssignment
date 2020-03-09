@@ -42,4 +42,15 @@ public class MvcExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Handle the missing OrderDetails exception
+     * @param ex
+     * @return a response entity with a JSON message and a bad request status
+     */
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleMissingOrderDetailsException(final MissingOrderDetailsException ex, final WebRequest webRequest) {
+        final MissingOrderDetailsResponse exceptionResponse = new MissingOrderDetailsResponse(ex.getMessage());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
