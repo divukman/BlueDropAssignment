@@ -39,6 +39,6 @@ public class OrderDto implements Serializable {
     @NotNull
     private String email;
 
-    Set<OrderProduct> orderProducts;
-    // Set<ProductDto> productDtos;
+   // Set<OrderProduct> orderProducts;
+    Set<ProductDto> productDtos;
 }

@@ -22,6 +22,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> listAllOrders(State productState) {
+
         return orderRepository.findAllByState(productState).stream().map(orderMapper::orderToOrderDto).collect(Collectors.toList());
     }
 }
