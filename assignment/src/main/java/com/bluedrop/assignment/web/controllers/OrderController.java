@@ -2,15 +2,15 @@ package com.bluedrop.assignment.web.controllers;
 
 import com.bluedrop.assignment.entities.State;
 import com.bluedrop.assignment.services.OrderService;
+import com.bluedrop.assignment.web.models.OrderDetailsDto;
 import com.bluedrop.assignment.web.models.OrderDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +26,11 @@ public class OrderController {
     @GetMapping("/orders")
     public ResponseEntity<List<OrderDto>> getAllOrders() {
         return new ResponseEntity<>(orderService.listAllOrders(State.ACTIVE), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "This endpoint is used to create a new order")
+    @PostMapping()
+    public ResponseEntity saveNewOrder(@RequestBody @Validated OrderDto orderDto) {
+        return new ResponseEntity(orderService.saveNewOrder(orderDto), HttpStatus.CREATED);
     }
 }

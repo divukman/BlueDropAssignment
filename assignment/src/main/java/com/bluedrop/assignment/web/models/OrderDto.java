@@ -29,16 +29,16 @@ public class OrderDto implements Serializable {
     private Integer version;
 
     @Null
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createdDate;
 
     @Null
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedDate;
 
     @NotNull
     private String email;
 
-   // Set<OrderProduct> orderProducts;
-    Set<ProductDto> productDtos;
+    @JsonProperty("orderDetails")
+    Set<OrderDetailsDto> orderDetailsDtos;
 }
