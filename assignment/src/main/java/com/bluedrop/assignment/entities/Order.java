@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class Order extends BaseEntity {
 
     @Builder
-    public Order(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, State state, String email) {
+    public Order(UUID id, Long version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate, State state, String email) {
         super(id, version, createdDate, lastModifiedDate, state);
         this.email = email;
     }
