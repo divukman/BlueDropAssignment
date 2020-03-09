@@ -2,6 +2,7 @@ package com.bluedrop.assignment.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Audited
 public class OrderProduct {
 
     //@EmbeddedId

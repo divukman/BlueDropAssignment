@@ -100,7 +100,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void geAllProducts() throws Exception {
+    void getAllProducts() throws Exception {
         when(productService.listAllProducts(State.ACTIVE)).thenReturn(getProductDtoList());
 
         final String result = mockMvc.perform(get("/api/v1/product/all")

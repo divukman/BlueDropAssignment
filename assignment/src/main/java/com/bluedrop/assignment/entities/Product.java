@@ -2,6 +2,7 @@ package com.bluedrop.assignment.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Audited
 public class Product extends BaseEntity {
 
     @Builder // hack to work with super class, try with @SuperBuilder

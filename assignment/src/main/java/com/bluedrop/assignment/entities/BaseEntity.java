@@ -10,7 +10,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 

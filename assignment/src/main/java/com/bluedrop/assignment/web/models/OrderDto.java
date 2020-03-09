@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
@@ -39,6 +40,7 @@ public class OrderDto implements Serializable {
     @NotNull
     private String email;
 
+    @Valid
     @JsonProperty("orderDetails")
     Set<OrderDetailsDto> orderDetailsDtos;
 }
