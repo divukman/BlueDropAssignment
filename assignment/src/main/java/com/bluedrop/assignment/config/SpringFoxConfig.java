@@ -20,6 +20,7 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag("Product", "These endpoints are used to manage the products.", 1));
+                .tags(new Tag("Product", "These endpoints are used to manage the products.", 1))
+                .tags(new Tag("Order", "These endpoints are used to manage the orders.", 2));
     }
 }

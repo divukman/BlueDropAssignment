@@ -1,5 +1,6 @@
 package com.bluedrop.assignment.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,5 +47,6 @@ public class Product extends BaseEntity {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     Set<OrderProduct> orderProducts;
 }

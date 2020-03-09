@@ -1,5 +1,6 @@
 package com.bluedrop.assignment.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="request")
+@Table(name = "request")
 public class Order extends BaseEntity {
 
     @Builder
@@ -27,5 +28,6 @@ public class Order extends BaseEntity {
     private String email;
 
     @OneToMany(mappedBy = "order")
+    @JsonIgnore
     Set<OrderProduct> orderProducts;
 }

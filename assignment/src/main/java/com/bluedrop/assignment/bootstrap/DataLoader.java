@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +37,8 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
-    private void loadData() {
+    @Transactional
+    protected void loadData() {
         final Product product1 = Product.builder()
                 .name("Product 1")
                 .sku(DataLoader.PRODUCT_1_SKU)
@@ -65,17 +67,15 @@ public class DataLoader implements CommandLineRunner {
                 .state(State.ACTIVE)
                 .build();
 
-        productRepository.save(product1);
-        //productRepository.save(product2);
-        productRepository.save(product3);
-        productRepository.save(product4);
-
         final Order order1 = Order.builder()
-                .email("john@gmail.com")
+                .email("dimitar@gmail.com")
                 .state(State.ACTIVE)
                 .build();
 
-        //orderRepository.save(order1);
+        final Order order2 = Order.builder()
+                .email("ante@gmail.com")
+                .state(State.ACTIVE)
+                .build();
 
         OrderProduct orderProduct1 = OrderProduct.builder()
                 .order(order1)
@@ -83,12 +83,31 @@ public class DataLoader implements CommandLineRunner {
                 .quantity(5)
                 .build();
 
+        OrderProduct orderProduct2 = OrderProduct.builder()
+                .order(order1)
+                .product(product3)
+                .quantity(2)
+                .build();
+
+        OrderProduct orderProduct3 = OrderProduct.builder()
+                .order(order2)
+                .product(product1)
+                .quantity(10)
+                .build();
+
+        OrderProduct orderProduct4 = OrderProduct.builder()
+                .order(order2)
+                .product(product4)
+                .quantity(15)
+                .build();
+
         Set<OrderProduct> orderProductSet = new HashSet<>();
         orderProductSet.add(orderProduct1);
-
-        order1.setOrderProducts(orderProductSet);
-        product2.setOrderProducts(orderProductSet);
+        orderProductSet.add(orderProduct2);
+        orderProductSet.add(orderProduct3);
+        orderProductSet.add(orderProduct4);
 
         orderProductRepository.saveAll(orderProductSet);
+
     }
 }

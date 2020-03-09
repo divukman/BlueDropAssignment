@@ -1,6 +1,8 @@
 package com.bluedrop.assignment.web.models;
 
+import com.bluedrop.assignment.entities.OrderProduct;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -35,4 +38,7 @@ public class OrderDto implements Serializable {
 
     @NotNull
     private String email;
+
+    Set<OrderProduct> orderProducts;
+    // Set<ProductDto> productDtos;
 }

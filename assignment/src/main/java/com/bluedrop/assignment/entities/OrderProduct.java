@@ -1,8 +1,10 @@
 package com.bluedrop.assignment.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @EqualsAndHashCode
@@ -17,11 +19,13 @@ public class OrderProduct {
     //OrderProductKey id;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     Long id;
 
     //@MapsId("order_id")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     Order order;
 
     //@MapsId("product_id")
