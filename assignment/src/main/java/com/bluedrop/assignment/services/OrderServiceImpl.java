@@ -15,6 +15,7 @@ import com.bluedrop.assignment.web.models.OrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,8 +38,21 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<OrderDto> listAllOrders(State productState) {
+        return orderRepository.findAllByState(productState)
+                .stream().map(orderMapper::orderToOrderDto).collect(Collectors.toList());
+    }
 
-        return orderRepository.findAllByState(productState).stream().map(orderMapper::orderToOrderDto).collect(Collectors.toList());
+    /**
+     * Lists all products within the datetime range provided.
+     * @param productState
+     * @param from
+     * @param to
+     * @return
+     */
+    @Override
+    public List<OrderDto> listAllOrdersForRange(State productState, OffsetDateTime from, OffsetDateTime to) {
+        return orderRepository.findAllByStateAndCreatedDateGreaterThanAndCreatedDateLessThan(productState, from, to)
+                .stream().map(orderMapper::orderToOrderDto).collect(Collectors.toList());
     }
 
     /**
